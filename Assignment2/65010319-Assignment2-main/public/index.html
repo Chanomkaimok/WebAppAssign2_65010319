@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>65010319_Drone Management System</title>
+    <style>
+        :root {
+            --primary: #cdb4db;
+            --hover-bg: #ffc8dd;
+            --content-bg: #cddafd;
+            --body-bg: #fff1e6;
+            --text-primary: #4a4a4a;
+            --text-secondary: #666666;
+            --text-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Sarabun', system-ui, -apple-system, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-primary);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar li {
+            border-bottom: 1px solid var(--text-light);
+        }
+
+        .navbar li:last-child {
+            border-bottom: none;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 1rem 1.5rem;
+            display: block;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: var(--content-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        /* Section Title */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+      /* Drone Icons */
+      .drone-icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        .drone-illustration {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            width: 100px;
+            height: 100px;
+            opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* เพิ่ม CSS สำหรับโดรนมุมขวา */
+        .drone-corner {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 60px;
+            height: 60px;
+            opacity: 0.8;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Forms */
+        .search-input, .form-input {
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--text-light);
+            color: var(--text-primary);
+        }
+
+        .search-input:focus, .form-input:focus {
+            border-color: var(--hover-bg);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(205, 180, 219, 0.2);
+        }
+
+        .search-input::placeholder, .form-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            background: var(--text-light);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--primary);
+        }
+
+        th {
+            color: var(--text-primary);
+            background: var(--primary);
+            font-weight: 700;
+        }
+
+        td {
+            color: var(--text-primary);
+            background: var(--text-light);
+        }
+
+        thead tr th {
+            border-bottom: 2px solid var(--primary);
+        }
+
+        tbody tr:nth-child(even) td {
+            background: var(--body-bg);
+        }
+
+        tr:hover td {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        /* Pagination */
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .page-number {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Utility Classes */
+        .flex { display: flex; }
+        .gap-4 { gap: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .max-w-lg { max-width: 32rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .w-full { width: 100%; }
+        .overflow-x-auto { overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="px-4">
+                <ul>
+                    <li><a href="#drone-config" class="nav-link">Drone Config</a></li>
+                    <li><a href="#temperature-log" class="nav-link">Submit Temperature Log</a></li>
+                    <li><a href="#drone-logs" class="nav-link">Drone Logs</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="px-4">
+        <section id="drone-config" class="content-section">
+            <div class="section-header">
+                <svg class="drone-icon" viewBox="0 0 64 64">
+                    <circle cx="32" cy="32" r="20" fill="#cdb4db"/>
+                    <rect x="30" y="12" width="4" height="40" fill="#ffc8dd" rx="2"/>
+                    <rect x="12" y="30" width="40" height="4" fill="#ffc8dd" rx="2"/>
+                    <circle cx="32" cy="32" r="8" fill="#fff1e6"/>
+                    <circle cx="32" cy="32" r="4" fill="#cddafd"/>
+                </svg>
+                <h1 class="section-title">Drone Config</h1>
+            </div>
+            <svg class="drone-corner" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="#ffc8dd" opacity="0.6"/>
+                <circle cx="50" cy="50" r="30" fill="#cdb4db"/>
+                <path d="M50 30 L60 45 L50 60 L40 45 Z" fill="#fff1e6"/>
+            </svg>
+            <div class="flex gap-4 mb-6">
+                <input type="text" id="search-drone-id" class="search-input" placeholder="Search by Drone ID">
+                <button onclick="searchDroneConfig()" class="btn">Search</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table id="config-table">
+                    <thead>
+                        <tr>
+                            <th>Drone ID</th>
+                            <th>Drone Name</th>
+                            <th>Light</th>
+                            <th>Max Speed</th>
+                            <th>Country</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Drone Config Data -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="temperature-log" class="content-section">
+            <div class="section-header">
+                <svg class="drone-icon" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="30" fill="#ffc8dd"/>
+                    <path d="M50 30 L60 45 L50 60 L40 45 Z" fill="#cdb4db"/>
+                    <circle cx="50" cy="50" r="10" fill="#fff1e6"/>
+                    <text x="50" y="54" text-anchor="middle" fill="#4a4a4a" font-size="12">°C</text>
+                </svg>
+                <h1 class="section-title">Submit Temperature Log</h1>
+            </div>
+            <form id="temperature-log-form" class="max-w-lg mx-auto">
+                <div class="space-y-4">
+                    <input type="number" id="drone_id" class="form-input" placeholder="Drone ID" required>
+                    <input type="text" id="drone_name" class="form-input" placeholder="Drone Name" required>
+                    <input type="number" id="celsius" class="form-input" placeholder="Temperature (Celsius)" required>
+                    <input type="text" id="country" class="form-input" placeholder="Country" required>
+                    <button type="submit" class="btn w-full">Submit</button>
+                </div>
+            </form>
+        </section>
+
+    <section id="drone-logs" class="content-section">
+        <h1>Drone Logs</h1>
+        <table id="logs-table">
+            <thead>
+                <tr>
+                    <th>Created</th>
+                    <th>Country</th>
+                    <th>Drone ID</th>
+                    <th>Drone Name</th>
+                    <th>Celsius</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Logs Data -->
+            </tbody>
+        </table>
+        <div class="pagination-controls">
+            <button id="prev-page">Previous</button>
+            <span id="page-number">Page 1</span>
+            <button id="next-page">Next</button>
+        </div>
+    </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
